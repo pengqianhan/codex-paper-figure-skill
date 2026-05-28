@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Paper Figure Skill"
+  short_description: "Create editable academic paper figures"
+  default_prompt: "Use $codex-paper-figure-skill to turn this paper section into an editable draw.io academic figure."

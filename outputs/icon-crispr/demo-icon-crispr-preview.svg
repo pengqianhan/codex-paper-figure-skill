@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="760" viewBox="0 0 1500 760">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#4B5563"/>
+    </marker>
+    <style>
+      .title{font:700 28px Arial,Helvetica,sans-serif;fill:#111827}
+      .subtitle{font:400 13px Arial,Helvetica,sans-serif;fill:#4B5563}
+      .label{font:700 21px Arial,Helvetica,sans-serif;fill:#111827}
+      .desc{font:400 13px Arial,Helvetica,sans-serif;fill:#4B5563}
+      .chip{font:400 16px Arial,Helvetica,sans-serif;fill:#111827}
+      .num{font:700 22px Arial,Helvetica,sans-serif;fill:#fff}
+      .small{font:400 11px Arial,Helvetica,sans-serif;fill:#6B7280}
+    </style>
+  </defs>
+  <rect width="1500" height="760" fill="#fff"/>
+  <text class="title" x="750" y="55" text-anchor="middle">Icon-Assisted CRISPR Imaging Screen</text>
+  <text class="subtitle" x="750" y="83" text-anchor="middle">Perturbation design, microscopy phenotyping, feature storage, predictive modeling, and orthogonal validation with external icon references.</text>
+  <g transform="translate(42 125)">
+    <rect width="238" height="390" rx="12" fill="#fff" stroke="#0F8B8D" stroke-width="2"/>
+    <circle cx="47" cy="46" r="25" fill="#0F8B8D"/><text class="num" x="47" y="54" text-anchor="middle">1</text>
+    <text class="label" x="148" y="39" text-anchor="middle">Perturbation</text><text class="label" x="148" y="66" text-anchor="middle">library</text>
+    <line x1="23" y1="95" x2="215" y2="95" stroke="#0F8B8D" stroke-width="2"/>
+    <image href="https://cdn-icons-png.flaticon.com/512/9236/9236703.png" x="50" y="130" width="135" height="135"/>
+    <text class="desc" x="119" y="295" text-anchor="middle">Guide RNA libraries target</text><text class="desc" x="119" y="313" text-anchor="middle">candidate regulators.</text>
+  </g>
+  <g transform="translate(325 125)">
+    <rect width="238" height="390" rx="12" fill="#fff" stroke="#1F6FBF" stroke-width="2"/>
+    <circle cx="47" cy="46" r="25" fill="#1F6FBF"/><text class="num" x="47" y="54" text-anchor="middle">2</text>
+    <text class="label" x="148" y="39" text-anchor="middle">Microscopy</text><text class="label" x="148" y="66" text-anchor="middle">phenotyping</text>
+    <line x1="23" y1="95" x2="215" y2="95" stroke="#1F6FBF" stroke-width="2"/>
+    <image href="https://cdn-icons-png.flaticon.com/512/1046/1046273.png" x="50" y="130" width="135" height="135"/>
+    <text class="desc" x="119" y="295" text-anchor="middle">Perturbed cells are imaged</text><text class="desc" x="119" y="313" text-anchor="middle">and featurized.</text>
+  </g>
+  <g transform="translate(608 125)">
+    <rect width="238" height="390" rx="12" fill="#fff" stroke="#3C7A34" stroke-width="2"/>
+    <circle cx="47" cy="46" r="25" fill="#3C7A34"/><text class="num" x="47" y="54" text-anchor="middle">3</text>
+    <text class="label" x="148" y="39" text-anchor="middle">Feature</text><text class="label" x="148" y="66" text-anchor="middle">database</text>
+    <line x1="23" y1="95" x2="215" y2="95" stroke="#3C7A34" stroke-width="2"/>
+    <image href="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" x="50" y="130" width="135" height="135"/>
+    <text class="desc" x="119" y="295" text-anchor="middle">Phenotypic and molecular</text><text class="desc" x="119" y="313" text-anchor="middle">features are unified.</text>
+  </g>
+  <g transform="translate(891 125)">
+    <rect width="238" height="390" rx="12" fill="#fff" stroke="#D99A24" stroke-width="2"/>
+    <circle cx="47" cy="46" r="25" fill="#D99A24"/><text class="num" x="47" y="54" text-anchor="middle">4</text>
+    <text class="label" x="148" y="39" text-anchor="middle">Predictive</text><text class="label" x="148" y="66" text-anchor="middle">model</text>
+    <line x1="23" y1="95" x2="215" y2="95" stroke="#D99A24" stroke-width="2"/>
+    <image href="https://cdn-icons-png.flaticon.com/512/16894/16894263.png" x="50" y="130" width="135" height="135"/>
+    <text class="desc" x="119" y="295" text-anchor="middle">A neural network predicts</text><text class="desc" x="119" y="313" text-anchor="middle">regulator effects.</text>
+  </g>
+  <g transform="translate(1174 125)">
+    <rect width="238" height="390" rx="12" fill="#fff" stroke="#EF6155" stroke-width="2"/>
+    <circle cx="47" cy="46" r="25" fill="#EF6155"/><text class="num" x="47" y="54" text-anchor="middle">5</text>
+    <text class="label" x="148" y="53" text-anchor="middle">Validation</text>
+    <line x1="23" y1="95" x2="215" y2="95" stroke="#EF6155" stroke-width="2"/>
+    <image href="https://cdn-icons-png.flaticon.com/512/1028/1028911.png" x="50" y="130" width="135" height="135"/>
+    <text class="desc" x="119" y="295" text-anchor="middle">Orthogonal assays confirm</text><text class="desc" x="119" y="313" text-anchor="middle">top-ranked regulators.</text>
+  </g>
+  <line x1="280" y1="320" x2="325" y2="320" stroke="#4B5563" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="563" y1="320" x2="608" y2="320" stroke="#4B5563" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="846" y1="320" x2="891" y2="320" stroke="#4B5563" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="1129" y1="320" x2="1174" y2="320" stroke="#4B5563" stroke-width="4" marker-end="url(#arrow)"/>
+  <g class="chip" text-anchor="middle">
+    <line x1="160" y1="515" x2="160" y2="585" stroke="#0F8B8D" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <rect x="55" y="585" width="210" height="68" rx="12" fill="#E8F7F6" stroke="#0F8B8D" stroke-width="2"/><text x="160" y="626">guide RNAs</text>
+    <line x1="443" y1="515" x2="443" y2="585" stroke="#1F6FBF" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <rect x="338" y="585" width="210" height="68" rx="12" fill="#EAF3FF" stroke="#1F6FBF" stroke-width="2"/><text x="443" y="626">cell images</text>
+    <line x1="726" y1="515" x2="726" y2="585" stroke="#3C7A34" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <rect x="621" y="585" width="210" height="68" rx="12" fill="#ECF7EA" stroke="#3C7A34" stroke-width="2"/><text x="726" y="626">feature vectors</text>
+    <line x1="1009" y1="515" x2="1009" y2="585" stroke="#D99A24" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <rect x="904" y="585" width="210" height="68" rx="12" fill="#FFF5DF" stroke="#D99A24" stroke-width="2"/><text x="1009" y="626">hit scores</text>
+    <line x1="1292" y1="515" x2="1292" y2="585" stroke="#EF6155" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <rect x="1187" y="585" width="210" height="68" rx="12" fill="#FFF0EE" stroke="#EF6155" stroke-width="2"/><text x="1292" y="626">confirmed regulators</text>
+  </g>
+  <text class="small" x="750" y="718" text-anchor="middle">Icon sources: Freepik from Flaticon. See README for source URLs and attribution notes.</text>
+</svg>

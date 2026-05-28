@@ -1,0 +1,119 @@
+<mxGraphModel dx="1480" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="760" math="0" shadow="0" adaptiveColors="auto">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="title" value="Icon-Assisted CRISPR Imaging Screen" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="350" y="25" width="800" height="42" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="Perturbation design, microscopy phenotyping, feature storage, predictive modeling, and orthogonal validation are shown as editable draw.io elements with Flaticon icon references." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontColor=#4B5563;" vertex="1" parent="1">
+      <mxGeometry x="245" y="63" width="1010" height="28" as="geometry"/>
+    </mxCell>
+    <mxCell id="card1" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;fillColor=#FFFFFF;strokeColor=#0F8B8D;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="42" y="125" width="238" height="390" as="geometry"/>
+    </mxCell>
+    <mxCell id="card2" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;fillColor=#FFFFFF;strokeColor=#1F6FBF;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="325" y="125" width="238" height="390" as="geometry"/>
+    </mxCell>
+    <mxCell id="card3" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;fillColor=#FFFFFF;strokeColor=#3C7A34;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="608" y="125" width="238" height="390" as="geometry"/>
+    </mxCell>
+    <mxCell id="card4" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;fillColor=#FFFFFF;strokeColor=#D99A24;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="891" y="125" width="238" height="390" as="geometry"/>
+    </mxCell>
+    <mxCell id="card5" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;fillColor=#FFFFFF;strokeColor=#EF6155;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="1174" y="125" width="238" height="390" as="geometry"/>
+    </mxCell>
+    <mxCell id="step1" value="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0F8B8D;strokeColor=#0F8B8D;fontColor=#FFFFFF;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="64" y="146" width="50" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="step2" value="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1F6FBF;strokeColor=#1F6FBF;fontColor=#FFFFFF;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="347" y="146" width="50" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="step3" value="3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3C7A34;strokeColor=#3C7A34;fontColor=#FFFFFF;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="630" y="146" width="50" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="step4" value="4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D99A24;strokeColor=#D99A24;fontColor=#FFFFFF;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="913" y="146" width="50" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="step5" value="5" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EF6155;strokeColor=#EF6155;fontColor=#FFFFFF;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1196" y="146" width="50" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="label1" value="Perturbation&lt;br&gt;library" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=21;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="120" y="148" width="135" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="label2" value="Microscopy&lt;br&gt;phenotyping" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=21;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="400" y="148" width="145" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="label3" value="Feature&lt;br&gt;database" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=21;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="687" y="148" width="130" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="label4" value="Predictive&lt;br&gt;model" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=21;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="972" y="148" width="128" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="label5" value="Validation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="1252" y="158" width="132" height="36" as="geometry"/>
+    </mxCell>
+    <mxCell id="rule1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0F8B8D;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="65" y="220" as="sourcePoint"/><mxPoint x="257" y="220" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="rule2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1F6FBF;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="348" y="220" as="sourcePoint"/><mxPoint x="540" y="220" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="rule3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#3C7A34;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="631" y="220" as="sourcePoint"/><mxPoint x="823" y="220" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="rule4" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#D99A24;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="914" y="220" as="sourcePoint"/><mxPoint x="1106" y="220" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="rule5" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#EF6155;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1197" y="220" as="sourcePoint"/><mxPoint x="1389" y="220" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="icon-dna" value="" style="shape=image;html=1;image=https://cdn-icons-png.flaticon.com/512/9236/9236703.png;aspect=fixed;" vertex="1" parent="1">
+      <mxGeometry x="92" y="255" width="135" height="135" as="geometry"/>
+    </mxCell>
+    <mxCell id="icon-microscope" value="" style="shape=image;html=1;image=https://cdn-icons-png.flaticon.com/512/1046/1046273.png;aspect=fixed;" vertex="1" parent="1">
+      <mxGeometry x="377" y="255" width="135" height="135" as="geometry"/>
+    </mxCell>
+    <mxCell id="icon-database" value="" style="shape=image;html=1;image=https://cdn-icons-png.flaticon.com/512/4248/4248443.png;aspect=fixed;" vertex="1" parent="1">
+      <mxGeometry x="660" y="255" width="135" height="135" as="geometry"/>
+    </mxCell>
+    <mxCell id="icon-neural" value="" style="shape=image;html=1;image=https://cdn-icons-png.flaticon.com/512/16894/16894263.png;aspect=fixed;" vertex="1" parent="1">
+      <mxGeometry x="943" y="255" width="135" height="135" as="geometry"/>
+    </mxCell>
+    <mxCell id="icon-checklist" value="" style="shape=image;html=1;image=https://cdn-icons-png.flaticon.com/512/1028/1028911.png;aspect=fixed;" vertex="1" parent="1">
+      <mxGeometry x="1226" y="255" width="135" height="135" as="geometry"/>
+    </mxCell>
+    <mxCell id="desc1" value="Guide RNA libraries target candidate regulators before imaging." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=13;fontColor=#4B5563;whiteSpace=wrap;" vertex="1" parent="1">
+      <mxGeometry x="70" y="405" width="180" height="54" as="geometry"/>
+    </mxCell>
+    <mxCell id="desc2" value="Perturbed cells are imaged and converted to morphology features." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=13;fontColor=#4B5563;whiteSpace=wrap;" vertex="1" parent="1">
+      <mxGeometry x="353" y="405" width="180" height="54" as="geometry"/>
+    </mxCell>
+    <mxCell id="desc3" value="Phenotypic and molecular features are stored in one table." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=13;fontColor=#4B5563;whiteSpace=wrap;" vertex="1" parent="1">
+      <mxGeometry x="636" y="405" width="180" height="54" as="geometry"/>
+    </mxCell>
+    <mxCell id="desc4" value="A neural network predicts regulator effects and hit scores." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=13;fontColor=#4B5563;whiteSpace=wrap;" vertex="1" parent="1">
+      <mxGeometry x="919" y="405" width="180" height="54" as="geometry"/>
+    </mxCell>
+    <mxCell id="desc5" value="Orthogonal assays confirm top-ranked regulators." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=13;fontColor=#4B5563;whiteSpace=wrap;" vertex="1" parent="1">
+      <mxGeometry x="1202" y="405" width="180" height="54" as="geometry"/>
+    </mxCell>
+    <mxCell id="arrow12" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#4B5563;strokeWidth=4;" edge="1" parent="1" source="card1" target="card2"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="arrow23" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#4B5563;strokeWidth=4;" edge="1" parent="1" source="card2" target="card3"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="arrow34" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#4B5563;strokeWidth=4;" edge="1" parent="1" source="card3" target="card4"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="arrow45" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#4B5563;strokeWidth=4;" edge="1" parent="1" source="card4" target="card5"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="chip1" value="guide RNAs" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#E8F7F6;strokeColor=#0F8B8D;strokeWidth=2;fontSize=16;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="55" y="585" width="210" height="68" as="geometry"/>
+    </mxCell>
+    <mxCell id="chip2" value="cell images" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#EAF3FF;strokeColor=#1F6FBF;strokeWidth=2;fontSize=16;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="338" y="585" width="210" height="68" as="geometry"/>
+    </mxCell>
+    <mxCell id="chip3" value="feature vectors" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ECF7EA;strokeColor=#3C7A34;strokeWidth=2;fontSize=16;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="621" y="585" width="210" height="68" as="geometry"/>
+    </mxCell>
+    <mxCell id="chip4" value="hit scores" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFF5DF;strokeColor=#D99A24;strokeWidth=2;fontSize=16;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="904" y="585" width="210" height="68" as="geometry"/>
+    </mxCell>
+    <mxCell id="chip5" value="confirmed regulators" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFF0EE;strokeColor=#EF6155;strokeWidth=2;fontSize=16;fontColor=#111827;" vertex="1" parent="1">
+      <mxGeometry x="1187" y="585" width="210" height="68" as="geometry"/>
+    </mxCell>
+    <mxCell id="drop1" value="" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=2 6;strokeColor=#0F8B8D;strokeWidth=4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="160" y="515" as="sourcePoint"/><mxPoint x="160" y="585" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="drop2" value="" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=2 6;strokeColor=#1F6FBF;strokeWidth=4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="443" y="515" as="sourcePoint"/><mxPoint x="443" y="585" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="drop3" value="" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=2 6;strokeColor=#3C7A34;strokeWidth=4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="726" y="515" as="sourcePoint"/><mxPoint x="726" y="585" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="drop4" value="" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=2 6;strokeColor=#D99A24;strokeWidth=4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1009" y="515" as="sourcePoint"/><mxPoint x="1009" y="585" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="drop5" value="" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=2 6;strokeColor=#EF6155;strokeWidth=4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1292" y="515" as="sourcePoint"/><mxPoint x="1292" y="585" as="targetPoint"/></mxGeometry></mxCell>
+    <mxCell id="footnote" value="Icon sources: Freepik from Flaticon. See README for source URLs and attribution notes." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontColor=#6B7280;" vertex="1" parent="1">
+      <mxGeometry x="440" y="700" width="620" height="24" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>
