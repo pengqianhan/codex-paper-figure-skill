@@ -1,6 +1,8 @@
 ---
 name: codex-paper-figure-skill
 description: Create editable academic-paper figures from natural-language figure descriptions, manuscript sections, methods/results text, graphical abstract ideas, or paper-specific visual concepts. Use when Codex needs to turn scientific text into a polished journal-style diagram by first generating a raster visual reference with the image generation tool, then recreating it directly as editable draw.io/.drawio mxGraphModel XML. Also use when a user asks for research figures, paper diagrams, mechanism figures, method overview figures, model architecture figures, workflow schematics, publication-ready editable diagrams, or Flaticon/icon-assisted paper figures using Codex's built-in Browser.
+author: Pengqian Han
+version: 0.01
 ---
 
 # Codex Paper Figure Skill
