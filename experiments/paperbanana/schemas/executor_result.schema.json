@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutorResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "status", "artifacts", "budget", "errors"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case_[0-9a-f]{16}$"},
+    "status": {"enum": ["complete", "infrastructure_failed", "invalid_output"]},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawio", "png", "reference", "trace"],
+      "properties": {
+        "drawio": {"type": ["string", "null"]},
+        "png": {"type": ["string", "null"]},
+        "reference": {"type": ["string", "null"]},
+        "trace": {"type": "string"}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image_gen_calls", "correction_cycles", "retries", "wall_seconds"],
+      "properties": {
+        "image_gen_calls": {"type": "integer", "minimum": 0, "maximum": 1},
+        "correction_cycles": {"type": "integer", "minimum": 0, "maximum": 2},
+        "retries": {"type": "integer", "minimum": 0, "maximum": 1},
+        "wall_seconds": {"type": "number", "minimum": 0, "maximum": 1200}
+      }
+    },
+    "errors": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

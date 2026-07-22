@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DimensionIsolatedJudgeJob",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "dimension", "visual_intent", "human_image", "model_image"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case_[0-9a-f]{16}$"},
+    "dimension": {"enum": ["faithfulness", "conciseness", "readability", "aesthetics"]},
+    "content": {"type": "string"},
+    "visual_intent": {"type": "string"},
+    "human_image": {"type": "string"},
+    "model_image": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"dimension": {"enum": ["faithfulness", "conciseness"]}}},
+      "then": {"required": ["content"]}
+    },
+    {
+      "if": {"properties": {"dimension": {"enum": ["readability", "aesthetics"]}}},
+      "then": {"not": {"required": ["content"]}}
+    }
+  ]
+}

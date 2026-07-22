@@ -3,6 +3,10 @@
 状态：已完成需求 grilling，方案待实施  
 制定日期：2026-07-23（Pacific/Auckland）
 
+> 当前实施阶段（2026-07-23）：因预算限制，先只实现 SkillOpt-Lite。
+> 本阶段最终盲测为 baseline 与 SkillOpt-Lite 两个冻结版本（292 x 2）；
+> Meta-Harness 流程保留在本方案中，之后从同一公共脚手架单独实现。
+
 ## 1. 目标
 
 在同一个初始 `SKILL.md` 上分别应用两套原生优化流程：
@@ -579,4 +583,3 @@ API 密钥、认证 token、用户配置全文和个人环境变量不得进入�
 - 通过 `/Applications/draw.io.app/Contents/MacOS/draw.io` 执行导出。
 
 发生审批时只申请完成上述已确认范围所需的最小权限，不申请宽泛的文件系统或任意命令权限。
-

@@ -1,0 +1,87 @@
+protocol_version: 1
+name: codex-paper-figure-skill-paperbanana
+current_phase: skillopt_lite_only
+enabled_variants: [baseline, skillopt_lite]
+seeds:
+  split: 20260723
+  within_split_order: 20260724
+  anonymization: 20260725
+  test_interleave: 20260726
+  repeat_judge: 20260727
+  bootstrap: 20260728
+
+paths:
+  dataset_root: /Users/pengqianhan/Downloads/PaperBananaBench/diagram
+  skill: codex-paper-figure-skill/SKILL.md
+  drawio_cli: /Applications/draw.io.app/Contents/MacOS/draw.io
+  output_root: /Users/pengqianhan/Downloads/PaperBananaBench/diagram/experiments
+
+mutable_surface:
+  allowed_paths: [codex-paper-figure-skill/SKILL.md]
+
+data:
+  train_size: 36
+  train_rounds: 3
+  train_batch_size: 12
+  validation_size: 24
+  test_size: 292
+  reserve_size: 238
+  include_test_during_optimization: false
+  category_quotas:
+    agent_reasoning: {train: 11, validation: 7}
+    generative_learning: {train: 9, validation: 6}
+    science_applications: {train: 6, validation: 4}
+    vision_perception: {train: 10, validation: 7}
+
+models:
+  proposer: {name: gpt-5.6-sol, reasoning_effort: high}
+  executor: {name: gpt-5.6-sol, reasoning_effort: medium}
+  judge: {name: gpt-5.6-sol, reasoning_effort: high}
+
+executor:
+  image_gen_calls: 1
+  correction_cycles: 2
+  timeout_seconds: 1200
+  infrastructure_retries: 1
+  browser_allowed: false
+  external_icons_allowed: false
+  provisional_batch_size: 4
+
+judge:
+  batch_size: 12
+  dimensions: [faithfulness, conciseness, readability, aesthetics]
+  repeat_fraction: 0.10
+  bootstrap_samples: 10000
+  numeric_outcomes: {Model: 1.0, Tie: 0.5, Human: 0.0}
+  fail_closed_extension: judge_error_scores_zero
+  input_matrix:
+    faithfulness: [content, visual_intent, human_image, model_image]
+    conciseness: [content, visual_intent, human_image, model_image]
+    readability: [visual_intent, human_image, model_image]
+    aesthetics: [visual_intent, human_image, model_image]
+
+renderer:
+  argv: [-x, -f, png, -e, -b, "10"]
+  environment: {DRAWIO_DISABLE_UPDATE: "true"}
+
+drawio_validation:
+  min_vertices: 4
+  min_edges: 1
+  min_editable_labels: 2
+  max_single_raster_canvas_ratio: 0.50
+  max_total_raster_canvas_ratio: 0.35
+  min_png_width: 256
+  min_png_height: 256
+  min_foreground_ratio: 0.002
+  max_foreground_ratio: 0.98
+
+skillopt_lite:
+  rounds: 3
+  max_edits_per_round: 4
+  dead_band: 0.01
+  gate_metric: overall_score
+  restore_best_after_training: true
+  skip_unconsumed_post_final_train: true
+  train_label_policy:
+    failed: hard_gate_failed_or_overall_human
+    passed: hard_gate_passed_and_overall_tie_or_model

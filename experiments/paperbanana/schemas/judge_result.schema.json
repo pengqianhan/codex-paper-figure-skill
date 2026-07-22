@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JudgeResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "dimension", "comparison_reasoning", "winner"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case_[0-9a-f]{16}$"},
+    "dimension": {
+      "enum": ["faithfulness", "conciseness", "readability", "aesthetics"]
+    },
+    "comparison_reasoning": {"type": "string", "minLength": 1},
+    "winner": {
+      "enum": ["Human", "Model", "Both are good", "Both are bad"]
+    }
+  }
+}
+

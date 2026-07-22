@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RunLedgerEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "job_id",
+    "role",
+    "skill_sha256",
+    "protocol_sha256",
+    "status",
+    "started_at",
+    "finished_at"
+  ],
+  "properties": {
+    "run_id": {"type": "string"},
+    "job_id": {"type": "string"},
+    "role": {"enum": ["proposer", "executor", "judge", "controller"]},
+    "skill_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "protocol_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["pending", "running", "complete", "failed"]},
+    "started_at": {"type": "string"},
+    "finished_at": {"type": ["string", "null"]},
+    "metadata": {"type": "object"}
+  }
+}
+
