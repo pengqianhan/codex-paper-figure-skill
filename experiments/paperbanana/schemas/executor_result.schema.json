@@ -3,9 +3,12 @@
   "title": "ExecutorResult",
   "type": "object",
   "additionalProperties": false,
-  "required": ["case_id", "status", "artifacts", "budget", "errors"],
+  "required": ["case_id", "job_id", "skill_sha256", "executor_manifest_sha256", "status", "artifacts", "artifact_sha256", "budget", "errors"],
   "properties": {
     "case_id": {"type": "string", "pattern": "^case_[0-9a-f]{16}$"},
+    "job_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "skill_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "executor_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "status": {"enum": ["complete", "infrastructure_failed", "invalid_output"]},
     "artifacts": {
       "type": "object",
@@ -16,6 +19,17 @@
         "png": {"type": ["string", "null"]},
         "reference": {"type": ["string", "null"]},
         "trace": {"type": "string"}
+      }
+    },
+    "artifact_sha256": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawio", "png", "reference", "trace"],
+      "properties": {
+        "drawio": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "png": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "reference": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "trace": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
       }
     },
     "budget": {
@@ -32,4 +46,3 @@
     "errors": {"type": "array", "items": {"type": "string"}}
   }
 }
-

@@ -20,5 +20,5 @@ both preserve the core logic without a veto error, and `Both are bad` when
 both fail. Do not use aesthetics as a tie-breaker.
 
 Inspect both images before responding. Output strict JSON matching the supplied
-judge schema and no additional prose.
-
+judge schema and no additional prose. Echo `evaluation_job_id`, `skill_sha256`,
+`human_image_sha256`, and `model_image_sha256` exactly from the job packet.

@@ -72,8 +72,54 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--job",
+        type=Path,
+        help="Prepared controller job whose hashes bind this aggregate receipt.",
+    )
     args = parser.parse_args()
-    result = aggregate(load_jsonl(args.input))
+    rows = load_jsonl(args.input)
+    result = aggregate(rows)
+    if args.job:
+        job = json.loads(args.job.read_text())
+        if job.get("action") != "evaluate":
+            raise ValueError("--job must refer to an evaluation job")
+        if result["count"] != int(job["expected_count"]):
+            raise ValueError("aggregate count does not match prepared job")
+        expected_case_ids = {
+            str(row["case_id"])
+            for row in load_jsonl(Path(job["executor_manifest"]))
+        }
+        actual_case_ids = [str(row.get("case_id", "")) for row in rows]
+        if len(actual_case_ids) != len(set(actual_case_ids)):
+            raise ValueError("aggregate input contains duplicate case IDs")
+        if set(actual_case_ids) != expected_case_ids:
+            raise ValueError("aggregate case IDs do not match prepared job manifest")
+        expected_provenance = {
+            "evaluation_job_id": job["job_id"],
+            "skill_sha256": job["skill_sha256"],
+            "executor_manifest_sha256": job["executor_manifest_sha256"],
+            "judge_manifest_sha256": job["judge_manifest_sha256"],
+        }
+        for row in rows:
+            for key, expected in expected_provenance.items():
+                if row.get(key) != expected:
+                    raise ValueError(
+                        f"scoring row provenance mismatch for {row.get('case_id')}: {key}"
+                    )
+            status_sha = row.get("executor_status_sha256")
+            if status_sha is not None and (
+                not isinstance(status_sha, str) or len(status_sha) != 64
+            ):
+                raise ValueError("invalid executor status provenance hash")
+        result["evaluation_receipt"] = {
+            "job_id": job["job_id"],
+            "skill_sha256": job["skill_sha256"],
+            "executor_manifest_sha256": job["executor_manifest_sha256"],
+            "judge_manifest_sha256": job["judge_manifest_sha256"],
+            "completed_count": result["count"],
+            "status": "complete",
+        }
     payload = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.write_text(payload)
@@ -83,4 +129,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

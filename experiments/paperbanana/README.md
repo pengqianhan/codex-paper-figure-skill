@@ -21,8 +21,10 @@ interfaces are method-neutral so they can be reused later.
 ## Local checks
 
 ```bash
-python3 -m unittest discover -s experiments/paperbanana/tests -v
-python3 experiments/paperbanana/scripts/make_manifests.py \
+python -m pip install -r experiments/paperbanana/requirements-dev.txt
+PYTHONDONTWRITEBYTECODE=1 python -m unittest discover \
+  -s experiments/paperbanana/tests -v
+python experiments/paperbanana/scripts/make_manifests.py \
   --dataset-root /Users/pengqianhan/Downloads/PaperBananaBench/diagram \
   --output-dir /tmp/paperbanana-manifests \
   --alias-map /path/to/private-reviewed-gt-aliases.json
@@ -39,3 +41,7 @@ Only SkillOpt-Lite is enabled now. The final frozen comparison for this phase
 is baseline versus SkillOpt-Lite (`292 x 2` executor jobs). Meta-Harness is
 deferred and can reuse this scaffold later without changing the first-phase
 results.
+
+The SkillOpt-Lite adapter is documented in
+`skillopt_lite/controller.md`. Its file-based state machine emits packets for
+fresh Codex proposer/executor/judge subagents and never calls a model itself.

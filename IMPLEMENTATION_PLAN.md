@@ -1,6 +1,6 @@
 # codex-paper-figure-skill 双方法优化与 PaperBananaBench 评测实施方案
 
-状态：已完成需求 grilling，方案待实施  
+状态：公共脚手架与 SkillOpt-Lite 适配器已实现；正式优化尚未启动
 制定日期：2026-07-23（Pacific/Auckland）
 
 > 当前实施阶段（2026-07-23）：因预算限制，先只实现 SkillOpt-Lite。
@@ -149,7 +149,8 @@ experiments/paperbanana/
 
 从 `ref.json` 生成：
 
-- train：36 个样本，分为三个互不重复的 12 样本批次。
+- train pool：36 个样本；SkillOpt-Lite 按官方 slash-loop 语义以 seed
+  1/2/3 每轮独立抽取 12 条，轮次之间允许重复。
 - validation：24 个固定样本，整个优化期间不变。
 - unused reserve：238 个样本，第一阶段完全不访问、不评分。
 

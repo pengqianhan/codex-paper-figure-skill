@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import random
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable
@@ -26,11 +27,7 @@ CATEGORY_QUOTAS = {
     "vision_perception": {"train": 10, "validation": 7},
 }
 RATIO_ORDER = ("16:9", "21:9", "3:2")
-TRAIN_BATCH_CATEGORY_COUNTS = (
-    {"agent_reasoning": 4, "generative_learning": 3, "science_applications": 2, "vision_perception": 3},
-    {"agent_reasoning": 4, "generative_learning": 3, "science_applications": 2, "vision_perception": 3},
-    {"agent_reasoning": 3, "generative_learning": 3, "science_applications": 2, "vision_perception": 4},
-)
+TRAIN_BATCH_SEEDS = (1, 2, 3)
 
 
 def _digest_key(seed: int, phase: str, item_id: str) -> str:
@@ -91,35 +88,15 @@ def _hamilton_take(
     return selected, remaining
 
 
-def _order_train_batches(train: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    by_category: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for item in train:
-        by_category[str(item.get("category", "unknown"))].append(item)
-    for category, values in by_category.items():
-        by_category[category] = sorted(
-            values,
-            key=lambda item: _digest_key(
-                ORDER_SEED, f"train-batches:{category}", str(item.get("id", ""))
-            ),
-        )
-    offsets = {category: 0 for category in by_category}
-    ordered: list[dict[str, Any]] = []
-    for round_index, matrix in enumerate(TRAIN_BATCH_CATEGORY_COUNTS, start=1):
-        batch: list[dict[str, Any]] = []
-        for category in sorted(matrix):
-            start = offsets[category]
-            end = start + matrix[category]
-            batch.extend(by_category[category][start:end])
-            offsets[category] = end
-        batch.sort(
-            key=lambda item: _digest_key(
-                ORDER_SEED, f"train-order:{round_index}", str(item.get("id", ""))
-            )
-        )
-        ordered.extend(batch)
-    if len(ordered) != 36:
-        raise AssertionError("train batch ordering lost items")
-    return ordered
+def sample_train_batch(
+    train_pool: list[dict[str, Any]], seed: int, batch_size: int = 12
+) -> list[dict[str, Any]]:
+    """Match SkillOpt-Lite's independently seeded sampling from one train pool."""
+
+    ordered_pool = sorted(train_pool, key=lambda item: str(item.get("id", "")))
+    if len(ordered_pool) < batch_size:
+        raise ValueError("train pool is smaller than the requested batch")
+    return random.Random(seed).sample(ordered_pool, batch_size)
 
 
 def split_reference_items(
@@ -164,7 +141,11 @@ def split_reference_items(
         train.extend(train_part)
         validation.extend(val_part)
         unused.extend(remainder)
-    train = _order_train_batches(train)
+    train.sort(
+        key=lambda item: _digest_key(
+            ORDER_SEED, "train-pool-order", str(item.get("id", ""))
+        )
+    )
     validation.sort(
         key=lambda item: _digest_key(
             ORDER_SEED, "validation-order", str(item.get("id", ""))
@@ -280,10 +261,10 @@ def build_manifests(
     ref_resolved_paths = resolve_ground_truth_paths(ref_items, dataset_root, aliases)
     train, validation, unused = split_reference_items(ref_items)
 
-    train_rows = [
+    train_pool_rows = [
         executor_case(item, "train", ANONYMIZATION_SEED) for item in train
     ]
-    train_judge_rows = [
+    train_pool_judge_rows = [
         _judge_projection(item, "train", dataset_root, ref_resolved_paths)
         for item in train
     ]
@@ -295,7 +276,7 @@ def build_manifests(
         Path(str(item.get("path_to_gt_image", ""))).name for item in ref_items
     }
     assert_manifest_safe(
-        train_rows + validation_rows,
+        train_pool_rows + validation_rows,
         dataset_root=str(dataset_root),
         ground_truth_basenames=gt_basenames,
     )
@@ -304,16 +285,35 @@ def build_manifests(
         for item in validation
     ]
 
-    for round_index in range(3):
-        start = round_index * 12
-        end = start + 12
+    train_executor_by_source = {
+        str(item["id"]): row for item, row in zip(train, train_pool_rows)
+    }
+    train_judge_by_source = {
+        str(item["id"]): row for item, row in zip(train, train_pool_judge_rows)
+    }
+    train_pool_source_order = sorted(
+        (str(item["id"]) for item in train)
+    )
+    _write_jsonl(
+        output_dir / "controller-only" / "train_pool_executor.jsonl",
+        [train_executor_by_source[source_id] for source_id in train_pool_source_order],
+    )
+    _write_jsonl(
+        output_dir / "controller-only" / "train_pool_judge.jsonl",
+        [train_judge_by_source[source_id] for source_id in train_pool_source_order],
+    )
+    round_unique_ids: set[str] = set()
+    for round_index, seed in enumerate(TRAIN_BATCH_SEEDS, start=1):
+        batch = sample_train_batch(train, seed)
+        source_ids = [str(item["id"]) for item in batch]
+        round_unique_ids.update(source_ids)
         _write_jsonl(
-            output_dir / f"train_round_{round_index + 1}_executor.jsonl",
-            train_rows[start:end],
+            output_dir / f"train_round_{round_index}_executor.jsonl",
+            [train_executor_by_source[source_id] for source_id in source_ids],
         )
         _write_jsonl(
-            output_dir / "judge-only" / f"train_round_{round_index + 1}.jsonl",
-            train_judge_rows[start:end],
+            output_dir / "judge-only" / f"train_round_{round_index}.jsonl",
+            [train_judge_by_source[source_id] for source_id in source_ids],
         )
     _write_jsonl(output_dir / "validation_executor.jsonl", validation_rows)
     _write_jsonl(
@@ -354,6 +354,7 @@ def build_manifests(
             "split": SPLIT_SEED,
             "within_split_order": ORDER_SEED,
             "anonymization": ANONYMIZATION_SEED,
+            "train_batches": list(TRAIN_BATCH_SEEDS),
         },
         "source": {
             "ref_json": str(ref_path),
@@ -363,6 +364,7 @@ def build_manifests(
         },
         "counts": {
             "train": len(train),
+            "train_unique_exposed_in_rounds": len(round_unique_ids),
             "validation": len(validation),
             "unused_reserve": len(unused),
             "test_materialized": test_count,

@@ -6,6 +6,8 @@ import random
 
 from experiments.paperbanana.scripts.make_manifests import (
     CATEGORY_QUOTAS,
+    TRAIN_BATCH_SEEDS,
+    sample_train_batch,
     split_reference_items,
 )
 
@@ -41,7 +43,7 @@ def synthetic_items() -> list[dict]:
 
 
 class SplitTests(unittest.TestCase):
-    def test_split_is_deterministic_disjoint_and_quota_exact(self) -> None:
+    def test_pool_split_is_deterministic_disjoint_and_quota_exact(self) -> None:
         rows = synthetic_items()
         first = split_reference_items(rows)
         second = split_reference_items(rows)
@@ -65,14 +67,16 @@ class SplitTests(unittest.TestCase):
         for category, quota in CATEGORY_QUOTAS.items():
             self.assertEqual(train_counts[category], quota["train"])
             self.assertEqual(val_counts[category], quota["validation"])
-        expected_batches = (
-            {"agent_reasoning": 4, "generative_learning": 3, "science_applications": 2, "vision_perception": 3},
-            {"agent_reasoning": 4, "generative_learning": 3, "science_applications": 2, "vision_perception": 3},
-            {"agent_reasoning": 3, "generative_learning": 3, "science_applications": 2, "vision_perception": 4},
-        )
-        for index, expected in enumerate(expected_batches):
-            batch = train[index * 12 : (index + 1) * 12]
-            self.assertEqual(Counter(item["category"] for item in batch), expected)
+        batches = [sample_train_batch(train, seed) for seed in TRAIN_BATCH_SEEDS]
+        for seed, batch in zip(TRAIN_BATCH_SEEDS, batches):
+            self.assertEqual(len(batch), 12)
+            self.assertEqual(len({item["id"] for item in batch}), 12)
+            self.assertEqual(
+                [item["id"] for item in batch],
+                [item["id"] for item in sample_train_batch(train, seed)],
+            )
+        exposed = {item["id"] for batch in batches for item in batch}
+        self.assertLess(len(exposed), 36)
 
 
 if __name__ == "__main__":

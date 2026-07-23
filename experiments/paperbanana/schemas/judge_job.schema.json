@@ -3,14 +3,18 @@
   "title": "DimensionIsolatedJudgeJob",
   "type": "object",
   "additionalProperties": false,
-  "required": ["case_id", "dimension", "visual_intent", "human_image", "model_image"],
+  "required": ["case_id", "dimension", "evaluation_job_id", "skill_sha256", "visual_intent", "human_image", "human_image_sha256", "model_image", "model_image_sha256"],
   "properties": {
     "case_id": {"type": "string", "pattern": "^case_[0-9a-f]{16}$"},
     "dimension": {"enum": ["faithfulness", "conciseness", "readability", "aesthetics"]},
+    "evaluation_job_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "skill_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "content": {"type": "string"},
     "visual_intent": {"type": "string"},
     "human_image": {"type": "string"},
-    "model_image": {"type": "string"}
+    "model_image": {"type": "string"},
+    "human_image_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "model_image_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
   },
   "allOf": [
     {

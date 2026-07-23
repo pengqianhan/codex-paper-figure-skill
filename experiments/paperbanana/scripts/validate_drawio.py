@@ -22,10 +22,12 @@ DEFAULT_LIMITS = {
     "min_editable_labels": 2,
     "max_single_raster_canvas_ratio": 0.50,
     "max_total_raster_canvas_ratio": 0.35,
+    "hard_max_total_raster_canvas_ratio": 0.80,
     "min_png_width": 256,
     "min_png_height": 256,
     "min_foreground_ratio": 0.002,
     "max_foreground_ratio": 0.98,
+    "max_border_foreground_ratio": 0.15,
 }
 
 _EXTERNAL_IMAGE_RE = re.compile(r"(?:^|;)image=(?:https?:)?//", re.IGNORECASE)
@@ -127,6 +129,10 @@ def inspect_drawio(path: Path, limits: dict[str, Any] | None = None) -> dict[str
         limits["max_total_raster_canvas_ratio"]
     ):
         warnings.append("high_total_raster_canvas_ratio")
+    if metrics["total_raster_canvas_ratio"] > float(
+        limits["hard_max_total_raster_canvas_ratio"]
+    ):
+        errors.append("aggregate_raster_dominates_canvas")
 
     return {
         "passed": not errors,
@@ -150,6 +156,7 @@ def inspect_png(path: Path, limits: dict[str, Any] | None = None) -> dict[str, A
             width, height = image.size
             thumbnail = image.copy()
             thumbnail.thumbnail((512, 512))
+            thumb_width, thumb_height = thumbnail.size
             pixels = list(thumbnail.getdata())
     except (OSError, ValueError) as exc:
         return {
@@ -172,15 +179,32 @@ def inspect_png(path: Path, limits: dict[str, Any] | None = None) -> dict[str, A
         dominant = (*dominant_rgb, 255)
         foreground = sum(_color_distance(pixel, dominant) > 24 for pixel in opaque)
         foreground_ratio = foreground / len(opaque)
+    border_pixels = [
+        pixel
+        for y in range(thumb_height)
+        for x in range(thumb_width)
+        if x < 2 or y < 2 or x >= thumb_width - 2 or y >= thumb_height - 2
+        for pixel in [pixels[y * thumb_width + x]]
+        if pixel[3] > 8
+    ]
+    border_foreground_ratio = (
+        sum(_color_distance(pixel, dominant) > 24 for pixel in border_pixels)
+        / len(border_pixels)
+        if border_pixels
+        else 0.0
+    )
     if foreground_ratio < float(limits["min_foreground_ratio"]):
         errors.append("png_nearly_blank")
     if foreground_ratio > float(limits["max_foreground_ratio"]):
         warnings.append("png_has_no_clear_background")
+    if border_foreground_ratio > float(limits["max_border_foreground_ratio"]):
+        errors.append("png_content_touches_export_border")
     metrics = {
         "width": width,
         "height": height,
         "foreground_ratio": foreground_ratio,
         "dominant_color": dominant,
+        "border_foreground_ratio": border_foreground_ratio,
     }
     return {
         "passed": not errors,
@@ -202,13 +226,57 @@ def validate_artifacts(
     }
 
 
+def validate_case_directory(
+    case_dir: Path, limits: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    required = {
+        "drawio": case_dir / "figure.drawio",
+        "png": case_dir / "figure.png",
+        "trace": case_dir / "trace.json",
+        "status": case_dir / "status.json",
+    }
+    missing = [label for label, path in required.items() if not path.is_file()]
+    if missing:
+        return {
+            "passed": False,
+            "errors": [f"missing_required_artifact:{label}" for label in missing],
+            "drawio": None,
+            "png": None,
+        }
+    metadata_errors = []
+    metadata = {}
+    for label in ("trace", "status"):
+        try:
+            metadata[label] = json.loads(required[label].read_text())
+        except (OSError, json.JSONDecodeError) as exc:
+            metadata_errors.append(f"invalid_{label}_json:{exc}")
+    status = metadata.get("status", {})
+    if status.get("status") != "complete":
+        metadata_errors.append(f"executor_status_not_complete:{status.get('status')}")
+    reference = (status.get("artifacts") or {}).get("reference")
+    if reference and not Path(str(reference)).is_file():
+        metadata_errors.append("missing_declared_reference_artifact")
+    result = validate_artifacts(required["drawio"], required["png"], limits)
+    result["errors"] = metadata_errors
+    result["passed"] = bool(result["passed"] and not metadata_errors)
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("drawio", type=Path)
-    parser.add_argument("png", type=Path)
+    parser.add_argument("drawio", type=Path, nargs="?")
+    parser.add_argument("png", type=Path, nargs="?")
+    parser.add_argument("--case-dir", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    result = validate_artifacts(args.drawio, args.png)
+    if args.case_dir:
+        if args.drawio or args.png:
+            parser.error("use either --case-dir or drawio/png positional paths")
+        result = validate_case_directory(args.case_dir)
+    else:
+        if not args.drawio or not args.png:
+            parser.error("drawio and png are required unless --case-dir is used")
+        result = validate_artifacts(args.drawio, args.png)
     payload = json.dumps(result, indent=2) + "\n"
     if args.output:
         args.output.write_text(payload)

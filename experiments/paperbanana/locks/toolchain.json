@@ -10,7 +10,7 @@
   "inputs": {
     "skill_source_commit": "a9a4ffcdda8088194c3a7962a538b0ac1bb25e23",
     "scaffold_parent_commit": "237d21dae0c4a36644a8f73d987d0e10c0373425",
-    "common_scaffold_commit": null,
+    "common_scaffold_commit": "7f143114ecd7b4224dd201386b6d0bcc0644e8b5",
     "baseline_skill_sha256": "40101c17247aa20fea9831ba5272c1bcfd844a9a2592625b809f7708e91cc7ba",
     "ref_json_sha256": "d978569bbd46c1d312cde669475b87ace868d80bfb7ffb0484464dbc6b8f5d6a",
     "test_json_sha256": "6e30fcf20fda71656e468e5d9418bbe4bf924b99234b06fcd6597113f9f37ce1"

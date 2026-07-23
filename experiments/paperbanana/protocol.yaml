@@ -9,6 +9,8 @@ seeds:
   test_interleave: 20260726
   repeat_judge: 20260727
   bootstrap: 20260728
+  train_batches: [1, 2, 3]
+  post_final_train: 4
 
 paths:
   dataset_root: /Users/pengqianhan/Downloads/PaperBananaBench/diagram
@@ -70,10 +72,12 @@ drawio_validation:
   min_editable_labels: 2
   max_single_raster_canvas_ratio: 0.50
   max_total_raster_canvas_ratio: 0.35
+  hard_max_total_raster_canvas_ratio: 0.80
   min_png_width: 256
   min_png_height: 256
   min_foreground_ratio: 0.002
   max_foreground_ratio: 0.98
+  max_border_foreground_ratio: 0.15
 
 skillopt_lite:
   rounds: 3
@@ -81,7 +85,7 @@ skillopt_lite:
   dead_band: 0.01
   gate_metric: overall_score
   restore_best_after_training: true
-  skip_unconsumed_post_final_train: true
+  run_unconsumed_post_final_train: true
   train_label_policy:
     failed: hard_gate_failed_or_overall_human
     passed: hard_gate_passed_and_overall_tie_or_model

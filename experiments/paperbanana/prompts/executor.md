@@ -16,6 +16,9 @@ For each case:
 6. Perform at most two XML correction cycles.
 7. Write `trace.json`, `status.json`, and all required artifacts under the
    supplied case output directory.
+8. Copy `job_id`, `skill_sha256`, and `executor_manifest_sha256` exactly from
+   the job packet into `status.json`; hash every emitted artifact after its
+   final write. Never invent or recompute those three provenance values.
 
 Browser, web search, external icon downloads, extra image-generation calls,
 manual reference retrieval, and cross-case copying are forbidden. A poor
@@ -24,4 +27,3 @@ figure is not a reason to exceed the budget.
 Do not judge your own figure and do not modify the skill, protocol, runner, or
 manifest. Return only a compact completion summary matching the supplied JSON
 schema.
-

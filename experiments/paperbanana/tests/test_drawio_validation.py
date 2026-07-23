@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw
 
 from experiments.paperbanana.scripts.validate_drawio import (
     inspect_drawio,
+    validate_case_directory,
     validate_artifacts,
 )
 
@@ -91,6 +92,24 @@ class DrawioValidationTests(unittest.TestCase):
             )
         self.assertTrue(result["passed"], result)
         self.assertIn("high_total_raster_canvas_ratio", result["warnings"])
+
+        dominating = tiled
+        dominating = dominating.replace('width="120" height="60"', 'width="200" height="600"')
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "dominating.drawio"
+            path.write_text(dominating)
+            result = inspect_drawio(path)
+        self.assertFalse(result["passed"])
+        self.assertIn("aggregate_raster_dominates_canvas", result["errors"])
+
+    def test_case_directory_requires_trace_and_complete_status(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "figure.drawio").write_text(VALID_DRAWIO)
+            Image.new("RGB", (800, 600), "white").save(root / "figure.png")
+            result = validate_case_directory(root)
+        self.assertFalse(result["passed"])
+        self.assertIn("missing_required_artifact:status", result["errors"])
 
 
 if __name__ == "__main__":

@@ -19,5 +19,5 @@ Return exactly one of `Model`, `Human`, `Both are good`, or `Both are bad`.
 Do not force a winner when both diagrams meet publication standards.
 
 Inspect both images before responding. Output strict JSON matching the supplied
-judge schema and no additional prose.
-
+judge schema and no additional prose. Echo `evaluation_job_id`, `skill_sha256`,
+`human_image_sha256`, and `model_image_sha256` exactly from the job packet.
