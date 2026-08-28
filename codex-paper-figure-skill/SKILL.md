@@ -16,7 +16,7 @@ Transform paper text or a figure concept into a publication-style editable diagr
 1. Parse the user's text into a figure brief:
    - Scientific message: the single claim or workflow the figure should communicate.
    - Entities: molecules, cells, devices, models, datasets, modules, cohorts, assays, or variables.
-   - Relationships: sequence, causality, comparison, hierarchy, feedback, input/output, or spatial organization.
+   - Relationships: sequence, causality, comparison, hierarchy, feedback, input/output, or spatial organization. Convert these into a canonical dependency graph before layout: every required input, distinct branch, merge, loss, feedback path, and output gets an explicit node or edge. Trace each depicted edge back to the source; do not disconnect, collapse, reverse, or invent operations for visual convenience.
    - Required labels: paper terms, abbreviations, axes, panel letters, conditions, and units that must appear verbatim.
    - Constraints: target journal style, aspect ratio, color palette, number of panels, export format, and whether the output must be editable.
 
@@ -44,8 +44,11 @@ Transform paper text or a figure concept into a publication-style editable diagr
 ## Figure Design Rules
 
 - Prefer restrained publication styling: white or very light background, 2-4 accent colors, thin strokes, consistent typography, clear grouping, and generous whitespace.
+- Prefer diagram-native compression over prose boxes: use domain-specific glyphs, compact repeated motifs, timelines, matrices, plots, or miniature examples for the scientific objects and reserve boxes for actual modules or boundaries. Keep labels to short terms or equations essential to the mechanism, make the main flow occupy the canvas evenly, and remove decorative callouts or dead whitespace that do not encode information.
 - Use panel labels `A`, `B`, `C` only when the figure has multiple panels.
+- Treat the supplied visual intent as an external caption, not canvas copy: omit a full figure title, subtitle, and caption unless the user explicitly requests them. Use only compact panel or stage headings needed to navigate the diagram.
 - Prefer left-to-right or top-to-bottom reading order unless the scientific process is cyclic.
+- Plan connector corridors before placing nodes. Route short orthogonal edges through whitespace, attach them to the nearest logical side, and keep every line and arrowhead outside text and node interiors; separate feedback lanes from the main flow and eliminate crossings by reordering nodes or using clearly labeled junctions.
 - Encode meaning with layout first, then color; do not rely on color alone.
 - Use colorblind-conscious palettes and avoid low-contrast text.
 - Keep visual detail low enough that the final draw.io file is easy to edit.
